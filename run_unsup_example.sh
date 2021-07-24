@@ -5,8 +5,8 @@
 # about how to use PyTorch's distributed data parallel.
 
 python train.py \
-    --model_name_or_path bert-base-uncased \
-    --train_file data/wiki1m_for_simcse.txt \
+    --model_name_or_path bert-base-chinese \
+    --train_file data/webank/webank_pure_text_nocut_train.txt \
     --output_dir result/my-unsup-simcse-bert-base-uncased \
     --num_train_epochs 1 \
     --per_device_train_batch_size 64 \
