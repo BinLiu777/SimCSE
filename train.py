@@ -37,6 +37,9 @@ from transformers.file_utils import cached_property, torch_required, is_torch_av
 from simcse.models import RobertaForCL, BertForCL
 from simcse.trainers import CLTrainer
 
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
 logger = logging.getLogger(__name__)
 MODEL_CONFIG_CLASSES = list(MODEL_FOR_MASKED_LM_MAPPING.keys())
 MODEL_TYPES = tuple(conf.model_type for conf in MODEL_CONFIG_CLASSES)

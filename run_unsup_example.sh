@@ -4,7 +4,7 @@
 # If you want to train it with multiple GPU cards, see "run_sup_example.sh"
 # about how to use PyTorch's distributed data parallel.
 
-CUDA_VISIBLE_DEVICES=2 python train.py \
+python train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/webank/webank_pure_text_nocut_train.txt \
     --output_dir result/my-unsup-simcse-bert-base-uncased \
@@ -22,5 +22,6 @@ CUDA_VISIBLE_DEVICES=2 python train.py \
     --eval_steps 125 \
     --evaluation_strategy steps \
     --do_eval \
+    --fp16 \
+    --local_rank 0
     "$@"
-    #--fp16 \
