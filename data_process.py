@@ -10,7 +10,7 @@ def saller():
             text = text.replace('，', '')
             text = text.replace('？', '')
             text = text.replace('！', '')
-            if len(text) > 5:
+            if len(text) > 5 and len(line) < 20:
                 f.write(line)
                 res.append(line)
     print(len(res))
@@ -33,4 +33,5 @@ def best_saller():
                     res.append(line)
     print(len(res))
 
+saller()
 best_saller()
