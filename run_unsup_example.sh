@@ -4,10 +4,10 @@
 # If you want to train it with multiple GPU cards, see "run_sup_example.sh"
 # about how to use PyTorch's distributed data parallel.
 
-python -m torch.distributed.launch --nproc_per_node=4 train.py \
+python -m torch.distributed.launch --nproc_per_node=2 train.py \
     --model_name_or_path bert-base-chinese \
-    --train_file data/webank/webank_pure_text_nocut_train.txt \
-    --output_dir result/my-unsup-simcse-bert-base-uncased \
+    --train_file data/best_saller/sale_asr_2000_pure_text.txt \
+    --output_dir result/my-unsup-simcse-bert-base-chinese-best-saller \
     --num_train_epochs 1 \
     --per_device_train_batch_size 64 \
     --learning_rate 3e-5 \
