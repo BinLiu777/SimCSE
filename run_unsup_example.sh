@@ -3,8 +3,8 @@
 # In this example, we show how to train SimCSE on unsupervised Wikipedia data.
 # If you want to train it with multiple GPU cards, see "run_sup_example.sh"
 # about how to use PyTorch's distributed data parallel.
-
-python -m torch.distributed.launch --nproc_per_node=4 train.py \
+#python -m torch.distributed.launch --nproc_per_node=4 train.py \
+python train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/best_saller/sale_asr_2000_pure_text.txt \
     --output_dir result/my-unsup-simcse-bert-base-chinese-best-saller \
@@ -21,8 +21,8 @@ python -m torch.distributed.launch --nproc_per_node=4 train.py \
     --do_train \
     --eval_steps 125 \
     --evaluation_strategy steps \
+    --do_eval \
     "$@"
-#    --do_eval \
 #    --fp16 \
 #    --local_rank 0
 
