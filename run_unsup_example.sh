@@ -21,7 +21,8 @@ python -m torch.distributed.launch --nproc_per_node=4 train.py \
     --do_train \
     --eval_steps 125 \
     --evaluation_strategy steps \
-    --do_eval \
-    --fp16 \
-    --local_rank 0
     "$@"
+#    --do_eval \
+#    --fp16 \
+#    --local_rank 0
+
