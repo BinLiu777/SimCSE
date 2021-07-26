@@ -8,7 +8,7 @@ python train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/saller/saler_pure_text.txt \
     --output_dir result/my-unsup-simcse-bert-base-chinese-best-saller \
-    --num_train_epochs 1 \
+    --num_train_epochs 3 \
     --per_device_train_batch_size 64 \
     --learning_rate 3e-5 \
     --max_seq_length 32 \
