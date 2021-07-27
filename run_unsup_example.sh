@@ -23,6 +23,7 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
     --evaluation_strategy steps \
     --do_eval \
     --fp16 \
+    --local_rank 0 \
     "$@"
 #    --fp16 \
 #    --local_rank 0
