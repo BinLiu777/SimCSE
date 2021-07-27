@@ -22,6 +22,7 @@ python train.py \
     --eval_steps 125 \
     --evaluation_strategy steps \
     --do_eval \
+    --fp16 \
     "$@"
 #    --fp16 \
 #    --local_rank 0
