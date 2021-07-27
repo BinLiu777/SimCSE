@@ -38,7 +38,7 @@ def main():
             default='test', 
             help="What evaluation mode to use (dev: fast mode, dev results; test: full mode, test results); fasttest: fast mode, test results")
     parser.add_argument("--task_set", type=str, 
-            choices=['sts', 'transfer', 'full', 'na'],
+            choices=['sts', 'transfer', 'full', 'na', 'webank', 'saller'],
             default='sts',
             help="What set of tasks to evaluate on. If not 'na', this will override '--tasks'")
     parser.add_argument("--tasks", type=str, nargs='+', 

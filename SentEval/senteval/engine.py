@@ -18,7 +18,7 @@ from senteval.snli import SNLIEval
 from senteval.trec import TRECEval
 from senteval.sick import SICKEntailmentEval, SICKEval
 from senteval.mrpc import MRPCEval
-from senteval.sts import STS12Eval, STS13Eval, STS14Eval, STS15Eval, STS16Eval, STSBenchmarkEval, SICKRelatednessEval, STSBenchmarkFinetune
+from senteval.sts import STS12Eval, STS13Eval, STS14Eval, STS15Eval, STS16Eval, STSBenchmarkEval, SICKRelatednessEval, STSBenchmarkFinetune, sallerEval, webankEval
 from senteval.sst import SSTEval
 from senteval.rank import ImageCaptionRetrievalEval
 from senteval.probing import *
@@ -45,7 +45,8 @@ class SE(object):
         self.batcher = batcher
         self.prepare = prepare if prepare else lambda x, y: None
 
-        self.list_tasks = ['CR', 'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC',
+        self.list_tasks = ['saller', 'webank',
+                           'CR', 'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC',
                            'SICKRelatedness', 'SICKEntailment', 'STSBenchmark',
                            'SNLI', 'ImageCaptionRetrieval', 'STS12', 'STS13',
                            'STS14', 'STS15', 'STS16',
@@ -63,7 +64,11 @@ class SE(object):
         assert name in self.list_tasks, str(name) + ' not in ' + str(self.list_tasks)
 
         # Original SentEval tasks
-        if name == 'CR':
+        if name == 'saller':
+            self.evaluation = sallerEval(tpath + '/downstream/STS/saller', seed=self.params.seed)
+        elif name == 'webank':
+            self.evaluation = webankEval(tpath + '/downstream/STS/webank', seed=self.params.seed)
+        elif name == 'CR':
             self.evaluation = CREval(tpath + '/downstream/CR', seed=self.params.seed)
         elif name == 'MR':
             self.evaluation = MREval(tpath + '/downstream/MR', seed=self.params.seed)
