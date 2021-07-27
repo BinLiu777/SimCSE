@@ -63,6 +63,10 @@ def main():
     elif args.task_set == 'full':
         args.tasks = ['STS12', 'STS13', 'STS14', 'STS15', 'STS16', 'STSBenchmark', 'SICKRelatedness']
         args.tasks += ['MR', 'CR', 'MPQA', 'SUBJ', 'SST2', 'TREC', 'MRPC']
+    elif args.task_set == 'webank':
+        args.tasks = ['webank']
+    elif args.task_set == 'best_saller':
+        args.tasks = ['best_saller', 'saller']
 
     # Set params for SentEval
     if args.mode == 'dev' or args.mode == 'fasttest':
