@@ -122,7 +122,7 @@ class CLTrainer(Trainer):
                                             'tenacity': 3, 'epoch_size': 2}
 
         se = senteval.engine.SE(params, batcher, prepare)
-        tasks = ['saller']
+        tasks = ['webank']
         # tasks = ['STSBenchmark', 'SICKRelatedness']
         if eval_senteval_transfer or self.args.eval_transfer:
             tasks = ['STSBenchmark', 'SICKRelatedness', 'MR', 'CR', 'SUBJ', 'MPQA', 'SST2', 'TREC', 'MRPC']
