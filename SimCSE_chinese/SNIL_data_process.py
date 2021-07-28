@@ -1,7 +1,7 @@
 import jsonlines
 import os
 import json
-file_path = "dataset/cnsd-snli/"
+file_path = "datasets/cnsd-snli/"
 train_file = 'cnsd_snli_v1.0.train.jsonl'
 test_file = 'cnsd_snli_v1.0.test.jsonl'
 dev_file = 'cnsd_snli_v1.0.dev.jsonl'
