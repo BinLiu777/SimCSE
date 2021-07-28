@@ -14,7 +14,7 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --per_device_train_batch_size 64 \
     --learning_rate 3e-5 \
     --max_seq_length 32 \
-    --metric_for_best_model stsb_spearman \
+    --metric_for_best_model webank_spearman \
     --load_best_model_at_end \
     --pooler_type cls \
     --mlp_only_train \

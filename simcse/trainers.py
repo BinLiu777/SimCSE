@@ -164,6 +164,8 @@ class CLTrainer(Trainer):
             metric_value = metrics[metric_to_check]
 
             operator = np.greater if self.args.greater_is_better else np.less
+            print(operator)
+            stop
             if (
                 self.state.best_metric is None
                 or self.state.best_model_checkpoint is None
@@ -507,8 +509,7 @@ class CLTrainer(Trainer):
                     self.state.epoch = epoch + (step + 1) / steps_in_epoch
                     self.control = self.callback_handler.on_step_end(self.args, self.state, self.control)
 
-                    # self._maybe_log_save_evaluate(tr_loss, model, trial, epoch)
-                    self._maybe_log_save_evaluate(tr_loss, 'stop', trial, epoch)
+                    self._maybe_log_save_evaluate(tr_loss, model, trial, epoch)
 
                 if self.control.should_epoch_stop or self.control.should_training_stop:
                     break
