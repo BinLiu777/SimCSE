@@ -54,9 +54,9 @@ def load_STS_data(path):
 
 snil_vocab = load_snli_vocab(os.path.join(snli_file_path, snli_train_file))
 sts_vocab = load_STS_data(os.path.join(sts_file_path, sts_train_file))
-all_vocab = snil_vocab + [x[0] for x in sts_vocab]
-simCSE_data = np.random.choice(all_vocab, 10000)
-print(len(simCSE_data))
+all_vocab = snil_vocab + [x[0] for x in sts_vocab] + [x[1] for x in sts_vocab]
+# simCSE_data = np.random.choice(all_vocab, 10000)
+simCSE_data = all_vocab
 test_data = load_STS_data(os.path.join(sts_file_path, sts_test_file))
 dev_data = load_STS_data(os.path.join(sts_file_path, sts_dev_file))
 
