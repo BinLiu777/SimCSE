@@ -24,5 +24,6 @@ CUDA_VISIBLE_DEVICES=1 python train.py \
     --do_eval \
     --fp16 \
     --local_rank 0 \
+    --RANK 0 \
     "$@"
 
