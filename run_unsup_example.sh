@@ -25,6 +25,6 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --evaluation_strategy steps \
     --do_eval \
     --fp16 \
-    --local_rank 1 \
+    --local_rank 0 \
     "$@"
 
