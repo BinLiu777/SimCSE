@@ -13,9 +13,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print("Using {} device".format(device))
 # model_path = "../model_set/chinese-bert-wwm-ext"
+model_path = 'bert-base-chinese'
 save_path = "./model_saved/best_model.pth"
-tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
-Config = BertConfig.from_pretrained('bert-base-chinese')
+tokenizer = BertTokenizer.from_pretrained(model_path)
+Config = BertConfig.from_pretrained(model_path)
 Config.attention_probs_dropout_prob = 0.3
 Config.hidden_dropout_prob = 0.3
 
