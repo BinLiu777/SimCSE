@@ -27,7 +27,7 @@ PORT_ID=$(expr $RANDOM + 1000)
 python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/webank/webank_pure_text_nocut_train.txt \
-    --output_dir result/unsup/webank_webank \
+    --output_dir result/unsup/webank_webank_littlelr \
     --num_train_epochs 5 \
     --per_device_train_batch_size 64 \
     --learning_rate 5e-5 \
