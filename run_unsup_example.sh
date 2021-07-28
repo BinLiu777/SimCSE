@@ -10,7 +10,7 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --model_name_or_path bert-base-chinese \
     --train_file data/webank/webank_pure_text_nocut_train.txt \
     --output_dir result/unsup/webank_webank \
-    --num_train_epochs 10 \
+    --num_train_epochs 100 \
     --per_device_train_batch_size 64 \
     --learning_rate 3e-5 \
     --max_seq_length 32 \
@@ -21,7 +21,7 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --overwrite_output_dir \
     --temp 0.05 \
     --do_train \
-    --eval_steps 200 \
+    --eval_steps 1000 \
     --evaluation_strategy steps \
     --do_eval \
     --fp16 \
