@@ -66,8 +66,10 @@ simCSE_data = np.random.choice(all_vocab, 150000)
 print(len(simCSE_data))
 test_data = load_STS_data(os.path.join(sts_file_path, sts_test_file))
 dev_data = load_STS_data(os.path.join(sts_file_path, sts_dev_file))
-# print(test_data)
-# print(dev_data)
+test_data = np.random.choice(test_data, 1000)
+dev_data = np.random.choice(dev_data, 1000)
+print(len(test_data))
+print(len(dev_data))
 
 
 
