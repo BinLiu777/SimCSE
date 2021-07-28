@@ -164,8 +164,6 @@ class CLTrainer(Trainer):
             metric_value = metrics[metric_to_check]
 
             operator = np.greater if self.args.greater_is_better else np.less
-            print(operator)
-            stop
             if (
                 self.state.best_metric is None
                 or self.state.best_model_checkpoint is None
