@@ -23,18 +23,18 @@ Config.hidden_dropout_prob = 0.3
 output_way = 'pooler'
 assert output_way in ['pooler', 'cls']
 
-sts_file_path = "./datasets/STS-B/"
-sts_train_file = 'cnsd-sts-train.txt'
-sts_test_file = 'cnsd-sts-test.txt'
-sts_dev_file = 'cnsd-sts-dev.txt'
+# sts_file_path = "./datasets/STS-B/"
+# sts_train_file = 'cnsd-sts-train.txt'
+# sts_test_file = 'cnsd-sts-test.txt'
+# sts_dev_file = 'cnsd-sts-dev.txt'
+#
+# snli_file_path = "./datasets/cnsd-snli/"
+# snli_train_file = 'cnsd_snli_v1.0.trainproceed.txt'
 
-snli_file_path = "./datasets/cnsd-snli/"
-snli_train_file = 'cnsd_snli_v1.0.trainproceed.txt'
-
-# sts_file_path = "./datasets/webank/"
-# sts_train_file = 'webank_train.txt'
-# sts_test_file = 'webank_dev.txt'
-# sts_dev_file = 'webank_dev.txt'
+sts_file_path = "./datasets/webank/"
+sts_train_file = 'webank_train.txt'
+sts_test_file = 'webank_dev.txt'
+sts_dev_file = 'webank_dev.txt'
 
 
 def load_snli_vocab(path):
@@ -57,11 +57,11 @@ def load_STS_data(path):
     return data
 
 
-snil_vocab = load_snli_vocab(os.path.join(snli_file_path, snli_train_file))
-# snil_vocab = []
+# snil_vocab = load_snli_vocab(os.path.join(snli_file_path, snli_train_file))
+snil_vocab = []
 sts_vocab = load_STS_data(os.path.join(sts_file_path, sts_train_file))
 all_vocab = snil_vocab + [x[0] for x in sts_vocab] + [x[1] for x in sts_vocab]
-# simCSE_data = np.random.choice(all_vocab, 10000)
+simCSE_data = np.random.choice(all_vocab, 150000)
 simCSE_data = all_vocab
 print(len(simCSE_data))
 test_data = load_STS_data(os.path.join(sts_file_path, sts_test_file))
