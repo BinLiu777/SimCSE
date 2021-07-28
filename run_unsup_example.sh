@@ -25,6 +25,6 @@ CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node $NUM_
     --evaluation_strategy steps \
     --do_eval \
     --fp16 \
-    --local_rank 0 \
+    --local_rank 1 \
     "$@"
 
