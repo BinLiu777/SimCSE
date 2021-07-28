@@ -1,7 +1,7 @@
 import logging
 import math
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import sys
 from dataclasses import dataclass, field
 from typing import Optional, Union, List, Dict, Tuple
