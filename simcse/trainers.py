@@ -122,19 +122,33 @@ class CLTrainer(Trainer):
                                             'tenacity': 3, 'epoch_size': 2}
 
         se = senteval.engine.SE(params, batcher, prepare)
-        # tasks = ['webank']
-        tasks = ['STSBenchmark', 'SICKRelatedness']
+        if 'webank' in self.args.metric_for_best_model:
+            tasks = ['webank']
+        elif 'sts' in self.args.metric_for_best_model:
+            tasks = ['STSBenchmark', 'SICKRelatedness']
+        else:
+            raise ValueError('<metric_for_best_model> should in [webank_spearman, stsb_spearman]')
+
         if eval_senteval_transfer or self.args.eval_transfer:
             tasks = ['STSBenchmark', 'SICKRelatedness', 'MR', 'CR', 'SUBJ', 'MPQA', 'SST2', 'TREC', 'MRPC']
         self.model.eval()
         results = se.eval(tasks)
 
-        # webank_spearman = results['webank']['dev']['spearman'][0]
-        stsb_spearman = results['STSBenchmark']['dev']['spearman'][0]
-        sickr_spearman = results['SICKRelatedness']['dev']['spearman'][0]
+        if 'webank' in self.args.metric_for_best_model:
+            webank_spearman = results['webank']['dev']['spearman'][0]
+        elif 'sts' in self.args.metric_for_best_model:
+            stsb_spearman = results['STSBenchmark']['dev']['spearman'][0]
+            sickr_spearman = results['SICKRelatedness']['dev']['spearman'][0]
+        else:
+            raise ValueError('<metric_for_best_model> should in [webank_spearman, stsb_spearman]')
 
-        # metrics = {"eval_webank_spearman": webank_spearman}
-        metrics = {"eval_stsb_spearman": stsb_spearman, "eval_sickr_spearman": sickr_spearman, "eval_avg_sts": (stsb_spearman + sickr_spearman) / 2}
+        if 'webank' in self.args.metric_for_best_model:
+            metrics = {"eval_webank_spearman": webank_spearman}
+        elif 'sts' in self.args.metric_for_best_model:
+            metrics = {"eval_stsb_spearman": stsb_spearman, "eval_sickr_spearman": sickr_spearman, "eval_avg_sts": (stsb_spearman + sickr_spearman) / 2}
+        else:
+            raise ValueError('<metric_for_best_model> should in [webank_spearman, stsb_spearman]')
+
         if eval_senteval_transfer or self.args.eval_transfer:
             avg_transfer = 0
             for task in ['MR', 'CR', 'SUBJ', 'MPQA', 'SST2', 'TREC', 'MRPC']:
