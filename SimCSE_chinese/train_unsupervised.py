@@ -126,7 +126,7 @@ class NeuralNetwork(nn.Module):
 model = NeuralNetwork(model_path, output_way).to(device)
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-5)
 
-batch_size = 64
+batch_size = 32
 maxlen = 64
 training_data = TrainDataset(simCSE_data, tokenizer, maxlen)
 train_dataloader = DataLoader(training_data, batch_size=batch_size)
