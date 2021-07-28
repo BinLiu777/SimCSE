@@ -7,7 +7,7 @@
 CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node=1 train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/saller/asr_saller.txt \
-    --output_dir result/saller_totol \
+    --output_dir result/saller_totol_test \
     --num_train_epochs 5 \
     --per_device_train_batch_size 64 \
     --learning_rate 3e-5 \
