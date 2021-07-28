@@ -8,31 +8,36 @@
 # --model_name_or_path bert-base-uncased \
 # --model_name_or_path bert-base-chinese \
 
-# saller
-# --train_file data/saller/asr_saller.txt \
-# --output_dir result/unsup/saller_webank \
+# data
+  # train
+    # saller
+    # --train_file data/saller/asr_saller.txt \
+    # --output_dir result/unsup/saller_webank \
 
-# wbank
-# --train_file data/webank/webank_pure_text_nocut_train.txt \
-# --output_dir result/unsup/webank_webank \
+    # wbank
+    # --train_file data/webank/webank_pure_text_nocut_train.txt \
+    # --output_dir result/unsup/webank_webank \
 
-# wiki_en
-# --train_file data/wiki1m_for_simcse.txt \
-# --output_dir result/unsup/wiki1m \
+    # wiki_en
+    # --train_file data/wiki1m_for_simcse.txt \
+    # --output_dir result/unsup/wiki1m \
+  # dev
+    # --metric_for_best_model webank_spearman \
+    # --metric_for_best_model stsb_spearman \
 
 
 NUM_GPU=1
 PORT_ID=$(expr $RANDOM + 1000)
 
 python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
-    --model_name_or_path bert-base-chinese \
-    --train_file data/webank/webank_pure_text_nocut_train.txt \
-    --output_dir result/unsup/webank_webank_littlelr \
+    --model_name_or_path bert-base-uncased \
+     --train_file data/wiki1m_for_simcse.txt \
+     --output_dir result/unsup/wiki1m_littlelr \
     --num_train_epochs 5 \
     --per_device_train_batch_size 64 \
     --learning_rate 5e-5 \
     --max_seq_length 32 \
-    --metric_for_best_model webank_spearman \
+    --metric_for_best_model stsb_spearman \
     --load_best_model_at_end \
     --pooler_type cls \
     --mlp_only_train \
