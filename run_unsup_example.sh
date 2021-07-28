@@ -6,7 +6,7 @@
 NUM_GPU=1
 PORT_ID=$(expr $RANDOM + 1000)
 
-CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
+python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/saller/asr_saller.txt \
     --output_dir result/saller_totol_test \
