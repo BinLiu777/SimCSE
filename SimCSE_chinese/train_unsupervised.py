@@ -42,11 +42,11 @@ def load_snli_vocab(path):
 def load_STS_data(path):
     data = []
     with open(path) as f:
-        for i in f:
-            d = i.split("||")
-            sentence1 = d[1]
-            sentence2 = d[2]
-            score = d[3]
+        for i in f.readlines():
+            d = i.split("\t")
+            sentence1 = d[0]
+            sentence2 = d[1]
+            score = d[2]
             data.append([sentence1, sentence2, score])
     return data
 
