@@ -9,8 +9,8 @@ PORT_ID=$(expr $RANDOM + 1000)
 python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/saller/asr_saller.txt \
-    --output_dir result/saller_totol_test \
-    --num_train_epochs 5 \
+    --output_dir result/unsup/saller_webank \
+    --num_train_epochs 10 \
     --per_device_train_batch_size 64 \
     --learning_rate 3e-5 \
     --max_seq_length 32 \
@@ -21,7 +21,7 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --overwrite_output_dir \
     --temp 0.05 \
     --do_train \
-    --eval_steps 125 \
+    --eval_steps 500 \
     --evaluation_strategy steps \
     --do_eval \
     --fp16 \
