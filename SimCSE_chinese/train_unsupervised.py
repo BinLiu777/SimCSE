@@ -9,12 +9,12 @@ import scipy.stats
 from tqdm import tqdm
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print("Using {} device".format(device))
 # model_path = "../model_set/chinese-bert-wwm-ext"
 model_path = 'bert-base-chinese'
-save_path = "./model_saved/best_model.pth"
+save_path = "./model_saved/best_model_webank.pth"
 tokenizer = BertTokenizer.from_pretrained(model_path)
 Config = BertConfig.from_pretrained(model_path)
 Config.attention_probs_dropout_prob = 0.3
@@ -23,13 +23,21 @@ Config.hidden_dropout_prob = 0.3
 output_way = 'pooler'
 assert output_way in ['pooler', 'cls']
 
-sts_file_path = "./datasets/STS-B/"
-sts_train_file = 'cnsd-sts-train.txt'
-sts_test_file = 'cnsd-sts-test.txt'
-sts_dev_file = 'cnsd-sts-dev.txt'
+# sts_file_path = "./datasets/STS-B/"
+# sts_train_file = 'cnsd-sts-train.txt'
+# sts_test_file = 'cnsd-sts-test.txt'
+# sts_dev_file = 'cnsd-sts-dev.txt'
+#
+# snli_file_path = "./datasets/cnsd-snli/"
+# snli_train_file = 'cnsd_snli_v1.0.trainproceed.txt'
 
-snli_file_path = "./datasets/cnsd-snli/"
-snli_train_file = 'cnsd_snli_v1.0.trainproceed.txt'
+sts_file_path = "./datasets/webank/"
+sts_train_file = 'webank_train.txt'
+sts_test_file = 'webank_dev.txt'
+sts_dev_file = 'webank_dev.txt'
+
+# snli_file_path = "./datasets/cnsd-snli/"
+# snli_train_file = 'cnsd_snli_v1.0.trainproceed.txt'
 
 
 def load_snli_vocab(path):
@@ -52,11 +60,12 @@ def load_STS_data(path):
     return data
 
 
-snil_vocab = load_snli_vocab(os.path.join(snli_file_path, snli_train_file))
+# snil_vocab = load_snli_vocab(os.path.join(snli_file_path, snli_train_file))
 sts_vocab = load_STS_data(os.path.join(sts_file_path, sts_train_file))
-all_vocab = snil_vocab + [x[0] for x in sts_vocab] + [x[1] for x in sts_vocab]
+# all_vocab = snil_vocab + [x[0] for x in sts_vocab] + [x[1] for x in sts_vocab]
 # simCSE_data = np.random.choice(all_vocab, 10000)
-simCSE_data = all_vocab
+simCSE_data = sts_vocab
+print(len(simCSE_data))
 test_data = load_STS_data(os.path.join(sts_file_path, sts_test_file))
 dev_data = load_STS_data(os.path.join(sts_file_path, sts_dev_file))
 
