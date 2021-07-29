@@ -15,27 +15,30 @@ print("Using {} device".format(device))
 # model_path = "bert-base-uncased"
 model_path = "hfl/chinese-bert-wwm-ext"
 # model_path = 'hfl/chinese-roberta-wwm-ext'
-save_path = "./model_saved/best_model_bert_wwm_ext_webank_avg.pth"
+save_path = "./model_saved/saller/best_model_bert_wwm_ext_cls.pth"
 tokenizer = BertTokenizer.from_pretrained(model_path)
 Config = BertConfig.from_pretrained(model_path)
 Config.attention_probs_dropout_prob = 0.3
 Config.hidden_dropout_prob = 0.3
 
-output_way = 'avg'
+output_way = 'cls'
 assert output_way in ['pooler', 'cls', 'avg']
 
-# sts_file_path = "./datasets/STS-B/"
-# sts_train_file = 'cnsd-sts-train.txt'
-# sts_test_file = 'cnsd-sts-test.txt'
-# sts_dev_file = 'cnsd-sts-dev.txt'
+sts_file_path = "./datasets/STS-B/"
+sts_train_file = 'cnsd-sts-train.txt'
+sts_test_file = 'cnsd-sts-test.txt'
+sts_dev_file = 'cnsd-sts-dev.txt'
 #
 # snli_file_path = "./datasets/cnsd-snli/"
 # snli_train_file = 'cnsd_snli_v1.0.trainproceed.txt'
 
-sts_file_path = "./datasets/webank/"
-sts_train_file = 'webank_train.txt'
-sts_test_file = 'webank_dev.txt'
-sts_dev_file = 'webank_dev.txt'
+# sts_file_path = "./datasets/webank/"
+# sts_train_file = 'webank_train.txt'
+# sts_test_file = 'webank_dev.txt'
+# sts_dev_file = 'webank_dev.txt'
+
+saller_file_path = "./datasets/saller/"
+saller_train_file = 'train.txt'
 
 
 def load_snli_vocab(path):
@@ -58,20 +61,31 @@ def load_STS_data(path):
     return data
 
 
+def load_saller_data(path):
+    data = []
+    with open(path) as f:
+        for i in f:
+            d = i.split("\t")
+            sentence1 = d[0]
+            point = d[2]
+            data.append([sentence1, point])
+    return data
+
+
 # snil_vocab = load_snli_vocab(os.path.join(snli_file_path, snli_train_file))
 snil_vocab = []
-sts_vocab = load_STS_data(os.path.join(sts_file_path, sts_train_file))
-all_vocab = snil_vocab + [x[0] for x in sts_vocab] + [x[1] for x in sts_vocab]
+sts_vocab = load_saller_data(os.path.join(saller_file_path, saller_train_file))
+all_vocab = snil_vocab + [x[0] for x in sts_vocab]
 simCSE_data = all_vocab
 # simCSE_data = np.random.choice(all_vocab, 150000)
 print(len(simCSE_data))
+# print(simCSE_data)
 test_data = load_STS_data(os.path.join(sts_file_path, sts_test_file))
 dev_data = load_STS_data(os.path.join(sts_file_path, sts_dev_file))
-test_data = test_data[:2000]
-dev_data =dev_data[-2000:]
+# test_data = test_data[:2000]
+# dev_data = dev_data[-2000:]
 print(len(test_data))
 print(len(dev_data))
-
 
 
 class TrainDataset(Dataset):
