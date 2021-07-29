@@ -9,7 +9,7 @@ import scipy.stats
 from tqdm import tqdm
 import os
 
-output_way = 'avg'
+output_way = 'cls'
 assert output_way in ['pooler', 'cls', 'avg']
 
 # model_path = "bert-base-uncased"
@@ -144,8 +144,12 @@ class NeuralNetwork(nn.Module):
         last_hidden = x1.last_hidden_state
         if self.output_way == 'cls':
             output = x1.last_hidden_state[:, 0]
+            print('last_hidden')
+            print(output.shape)
         elif self.output_way == 'pooler':
             output = x1.pooler_output
+            print('pooler_output')
+            print(output.shape)
         elif self.output_way == 'avg':
             output = ((last_hidden * attention_mask.unsqueeze(-1)).sum(1) / attention_mask.sum(-1).unsqueeze(-1))
         return output
@@ -230,11 +234,11 @@ def train(dataloader, testdata, model, optimizer):
 
 
 if __name__ == '__main__':
-    epochs = 1
-    for t in range(epochs):
-        print(f"Epoch {t + 1}\n-------------------------------")
-        train(train_dataloader, testing_data, model, optimizer)
-    print("Train_Done!")
+    # epochs = 1
+    # for t in range(epochs):
+    #     print(f"Epoch {t + 1}\n-------------------------------")
+    #     train(train_dataloader, testing_data, model, optimizer)
+    # print("Train_Done!")
     print("Deving_start!")
     model.load_state_dict(torch.load(save_path))
     corrcoef = test(deving_data, model)
