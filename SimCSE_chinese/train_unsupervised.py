@@ -13,10 +13,10 @@ output_way = 'avg'
 assert output_way in ['pooler', 'cls', 'avg']
 
 # model_path = "bert-base-uncased"
-model_name = 'bert'
+model_name = 'roberta'
 assert model_name in ['bert', 'roberta']
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print("Using {} device".format(device))
 
