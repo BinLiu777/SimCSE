@@ -9,11 +9,11 @@ import scipy.stats
 from tqdm import tqdm
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print("Using {} device".format(device))
 # model_path = "../model_set/chinese-bert-wwm-ext"
-model_path = 'bert-base-chinese'
+model_path = 'hfl/chinese-bert-wwm-ext'
 save_path = "./model_saved/best_model_webank.pth"
 tokenizer = BertTokenizer.from_pretrained(model_path)
 Config = BertConfig.from_pretrained(model_path)
