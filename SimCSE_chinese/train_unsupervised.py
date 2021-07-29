@@ -238,6 +238,6 @@ if __name__ == '__main__':
     #     train(train_dataloader, testing_data, model, optimizer)
     # print("Train_Done!")
     print("Deving_start!")
-    model.load_state_dict(torch.load(save_path))
+    model.load_state_dict(torch.load(save_path, map_location='cpu'))
     corrcoef = test(deving_data, model)
     print(f"dev_corrcoef: {corrcoef:>4f}")
