@@ -9,14 +9,14 @@ import scipy.stats
 from tqdm import tqdm
 import os
 
-output_way = 'pooler'
+output_way = 'avg'
 assert output_way in ['pooler', 'cls', 'avg']
 
 # model_path = "bert-base-uncased"
 model_name = 'bert'
 assert model_name in ['bert', 'roberta']
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print("Using {} device".format(device))
 
