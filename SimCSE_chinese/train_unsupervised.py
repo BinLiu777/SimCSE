@@ -27,6 +27,8 @@ tokenizer = BertTokenizer.from_pretrained(model_path)
 Config = BertConfig.from_pretrained(model_path)
 Config.attention_probs_dropout_prob = 0.3
 Config.hidden_dropout_prob = 0.3
+print(Config)
+stop
 
 
 sts_file_path = "./datasets/STS-B/"
