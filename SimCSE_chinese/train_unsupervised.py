@@ -14,7 +14,7 @@ device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 print("Using {} device".format(device))
 # model_path = "../model_set/chinese-bert-wwm-ext"
 model_path = 'hfl/chinese-bert-wwm-ext'
-save_path = "./model_saved/best_model_webank.pth"
+save_path = "./model_saved/best_model_wwm_ext_webank.pth"
 tokenizer = BertTokenizer.from_pretrained(model_path)
 Config = BertConfig.from_pretrained(model_path)
 Config.attention_probs_dropout_prob = 0.3
