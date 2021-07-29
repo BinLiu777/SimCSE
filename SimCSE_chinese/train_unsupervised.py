@@ -9,19 +9,19 @@ import scipy.stats
 from tqdm import tqdm
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print("Using {} device".format(device))
 # model_path = "bert-base-uncased"
-# model_path = "hfl/chinese-bert-wwm-ext"
-model_path = 'hfl/chinese-roberta-wwm-ext'
-save_path = "./model_saved/best_model_roberta_wwm_ext_webank.pth"
+model_path = "hfl/chinese-bert-wwm-ext"
+# model_path = 'hfl/chinese-roberta-wwm-ext'
+save_path = "./model_saved/best_model_bert_wwm_ext_webank_cls.pth"
 tokenizer = BertTokenizer.from_pretrained(model_path)
 Config = BertConfig.from_pretrained(model_path)
 Config.attention_probs_dropout_prob = 0.3
 Config.hidden_dropout_prob = 0.3
 
-output_way = 'pooler'
+output_way = 'cls'
 assert output_way in ['pooler', 'cls']
 
 # sts_file_path = "./datasets/STS-B/"
