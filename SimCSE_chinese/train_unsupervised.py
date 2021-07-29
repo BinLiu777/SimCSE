@@ -62,12 +62,12 @@ snil_vocab = []
 sts_vocab = load_STS_data(os.path.join(sts_file_path, sts_train_file))
 all_vocab = snil_vocab + [x[0] for x in sts_vocab] + [x[1] for x in sts_vocab]
 simCSE_data = all_vocab
-simCSE_data = np.random.choice(all_vocab, 150000)
+# simCSE_data = np.random.choice(all_vocab, 150000)
 print(len(simCSE_data))
 test_data = load_STS_data(os.path.join(sts_file_path, sts_test_file))
 dev_data = load_STS_data(os.path.join(sts_file_path, sts_dev_file))
-test_data = test_data[:1000]
-dev_data =dev_data[-1000:]
+test_data = test_data[:2000]
+dev_data =dev_data[-2000:]
 print(len(test_data))
 print(len(dev_data))
 
