@@ -34,10 +34,10 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --train_file data/saller_good_ppl.txt \
     --output_dir result/unsup/saller_saller \
     --num_train_epochs 3 \
-    --per_device_train_batch_size 512 \
+    --per_device_train_batch_size 256 \
     --learning_rate 5e-5 \
     --max_seq_length 64 \
-    --metric_for_best_model stsb_spearman \
+    --metric_for_best_model webank_spearman \
     --load_best_model_at_end \
     --pooler_type cls_before_pooler \
     --mlp_only_train \
