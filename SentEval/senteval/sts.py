@@ -159,7 +159,7 @@ class STS16Eval(STSEval):
 
 class webankEval(STSEval):
     def __init__(self, task_path, seed=1111):
-        logging.debug('\n\n***** Transfer task : saller*****\n\n')
+        logging.debug('\n\n***** Transfer task : webank*****\n\n')
         self.seed = seed
         self.samples = []
         train = self.loadFile(os.path.join(task_path, 'webank_train.txt'))
@@ -183,7 +183,28 @@ class webankEval(STSEval):
 
 
 class sallerEval(STSEval):
-    pass
+    def __init__(self, task_path, seed=1111):
+        logging.debug('\n\n***** Transfer task : saller*****\n\n')
+        self.seed = seed
+        self.samples = []
+        train = self.loadFile(os.path.join(task_path, 'saller_train.txt'))
+        dev = self.loadFile(os.path.join(task_path, 'saller_dev.txt'))
+        test = self.loadFile(os.path.join(task_path, 'saller_test.txt'))
+        self.datasets = ['train', 'dev', 'test']
+        self.data = {'train': train, 'dev': dev, 'test': test}
+
+    def loadFile(self, fpath):
+        sick_data = {'X_A': [], 'X_B': [], 'y': []}
+        with open(fpath, 'r', encoding='utf-8') as f:
+            for line in f.readlines():
+                text = line.strip().split('\t')
+                sick_data['X_A'].append(text[0])
+                sick_data['X_B'].append(text[1])
+                sick_data['y'].append(text[2])
+
+        sick_data['y'] = [float(s) for s in sick_data['y']]
+        self.samples += sick_data['X_A'] + sick_data["X_B"]
+        return (sick_data['X_A'], sick_data["X_B"], sick_data['y'])
 
 
 class STSBenchmarkEval(STSEval):

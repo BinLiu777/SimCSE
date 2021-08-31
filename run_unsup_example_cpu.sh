@@ -25,12 +25,7 @@
     # --metric_for_best_model webank_spearman \
     # --metric_for_best_model stsb_spearman \
 
-
-NUM_GPU=1
-PORT_ID=$(expr $RANDOM + 1000)
-#export OMP_NUM_THREADS=8
-
-python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
+python train.py \
     --model_name_or_path bert-base-chinese \
     --train_file data/saller_good_ppl.txt \
     --output_dir result/unsup/saller_saller \
@@ -41,13 +36,12 @@ python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT
     --evaluation_strategy steps \
     --metric_for_best_model saller_spearman \
     --load_best_model_at_end \
-    --eval_steps 125 \
+    --eval_steps 1 \
     --pooler_type cls_before_pooler \
     --mlp_only_train \
     --overwrite_output_dir \
     --temp 0.05 \
     --do_train \
     --do_eval \
-    --fp16 \
     "$@"
 

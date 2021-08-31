@@ -124,6 +124,8 @@ class CLTrainer(Trainer):
         se = senteval.engine.SE(params, batcher, prepare)
         if 'webank' in self.args.metric_for_best_model:
             tasks = ['webank']
+        elif 'saller' in self.args.metric_for_best_model:
+            tasks = ['saller']
         elif 'sts' in self.args.metric_for_best_model:
             tasks = ['STSBenchmark', 'SICKRelatedness']
         else:
@@ -136,6 +138,8 @@ class CLTrainer(Trainer):
 
         if 'webank' in self.args.metric_for_best_model:
             webank_spearman = results['webank']['dev']['spearman'][0]
+        elif 'saller' in self.args.metric_for_best_model:
+            saller_spearman = results['saller']['dev']['spearman'][0]
         elif 'sts' in self.args.metric_for_best_model:
             stsb_spearman = results['STSBenchmark']['dev']['spearman'][0]
             sickr_spearman = results['SICKRelatedness']['dev']['spearman'][0]
@@ -144,6 +148,8 @@ class CLTrainer(Trainer):
 
         if 'webank' in self.args.metric_for_best_model:
             metrics = {"eval_webank_spearman": webank_spearman}
+        elif 'saller' in self.args.metric_for_best_model:
+            metrics = {"eval_saller_spearman": saller_spearman}
         elif 'sts' in self.args.metric_for_best_model:
             metrics = {"eval_stsb_spearman": stsb_spearman, "eval_sickr_spearman": sickr_spearman, "eval_avg_sts": (stsb_spearman + sickr_spearman) / 2}
         else:
