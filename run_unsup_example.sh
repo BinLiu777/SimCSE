@@ -7,6 +7,7 @@
 # model
 # --model_name_or_path bert-base-uncased \
 # --model_name_or_path bert-base-chinese \
+# --model_name_or_path peterchou/simbert-chinese-base \
 
 # data
   # train
@@ -31,9 +32,9 @@ PORT_ID=$(expr $RANDOM + 1000)
 #export OMP_NUM_THREADS=8
 
 python -m torch.distributed.launch --nproc_per_node $NUM_GPU --master_port $PORT_ID train.py \
-    --model_name_or_path peterchou/simbert-chinese-base \
+    --model_name_or_path bert-base-chinese \
     --train_file data/saller_good_ppl.txt \
-    --output_dir result/unsup/saller_saller_simbert \
+    --output_dir result/unsup/saller_saller_bert \
     --num_train_epochs 1 \
     --per_device_train_batch_size 64 \
     --learning_rate 1e-5 \
